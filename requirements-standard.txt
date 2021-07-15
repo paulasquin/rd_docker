@@ -1,0 +1,10 @@
+jupyter
+pandas
+numpy
+pytest
+tqdm
+python-dotenv
+dataclasses
+requests
+pandas
+matplotlib

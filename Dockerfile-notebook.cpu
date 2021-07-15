@@ -1,0 +1,20 @@
+FROM ubuntu:18.04
+
+# Install essential software
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    apt-get install -y python3-pip git libexiv2-dev libz-dev libexpat-dev libjpeg-dev cmake build-essential \
+    python3-dev libimage-exiftool-perl curl gcc-5 g++-5 wget libsm6 libxext6 libxrender-dev ffmpeg
+
+# Install pip essentials
+RUN pip3 install --upgrade pip
+
+COPY requirements-vision-cpu.txt /tmp/requirements-vision-cpu.txt
+RUN pip install -r /tmp/requirements-vision-cpu.txt
+
+COPY requirements-standard.txt /tmp/requirements-standard.txt
+RUN pip install -r /tmp/requirements-standard.txt
+
+# Define working environment
+WORKDIR /app 
+CMD bash -c "jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --allow-root"
