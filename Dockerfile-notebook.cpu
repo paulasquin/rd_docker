@@ -17,4 +17,4 @@ RUN pip install -r /tmp/requirements-standard.txt
 
 # Define working environment
 WORKDIR /app 
-CMD bash -c "jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --allow-root"
+CMD bash -c "jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.password='sha256:dd847ba01b36:357fa1340c125c265e4860fc756bb65769953fe08ae8efdb559223e802008d9f'"
