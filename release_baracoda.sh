@@ -8,7 +8,9 @@ read VERSION
 
 # Building
 echo Start building images for version ${VERSION}...
-docker build -t ${DOCKER_IMAGE_NAME}:latest -f Dockerfile-notebook.cpu .
+# docker build -t ${DOCKER_IMAGE_NAME}:latest -f Dockerfile-notebook.cpu .
+# Build with baracoda private packages embedding pip.conf file without exposing secret
+DOCKER_BUILDKIT=1 docker build -t ${DOCKER_IMAGE_NAME}:latest --secret id=pipconfig,src=$VIRTUAL_ENV/pip.conf -f Dockerfile-notebook.cpu .
 echo Building done.
 
 # Auth

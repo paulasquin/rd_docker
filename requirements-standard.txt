@@ -8,3 +8,4 @@ dataclasses
 requests
 pandas
 matplotlib
+boto3

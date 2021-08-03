@@ -15,6 +15,13 @@ RUN pip install -r /tmp/requirements-vision-cpu.txt
 COPY requirements-standard.txt /tmp/requirements-standard.txt
 RUN pip install -r /tmp/requirements-standard.txt
 
+COPY requirements-personnal.txt /tmp/requirements-personnal.txt
+RUN --mount=type=secret,id=pipconfig,dst=/etc/pip.conf \
+    pip install -r /tmp/requirements-personnal.txt
+
 # Define working environment
-WORKDIR /app 
+WORKDIR /app
+# Get testing notebook
+COPY tests tests
+
 CMD bash -c "jupyter notebook --port=8888 --no-browser --ip=0.0.0.0 --allow-root --NotebookApp.password='sha256:38e7d6a98629:c9933cc5bfa343383724ed6c6adbaf8ee4271c606fca4fd008184b665ad7a8e2'"
